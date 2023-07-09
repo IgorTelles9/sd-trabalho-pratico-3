@@ -23,7 +23,7 @@ UDPSender::~UDPSender() {
 }
 
 bool UDPSender::send(const std::string& message) {
-    if (message.length() != 10) {
+    if (message.length() != 7) {
         std::cerr << "Invalid message length. Expected 10 characters." << std::endl;
         return false;
     }

@@ -28,7 +28,8 @@ UDPReceiver::~UDPReceiver() {
 }
 
 bool UDPReceiver::receive(std::string& message) {
-    char buffer[11]; // Allow an extra byte for null-terminator
+    // 00000|0 = port/id (5 char) |(separator) 0(type of message)
+    char buffer[8]; // Allow an extra byte for null-terminator
     struct sockaddr_in senderAddr;
     socklen_t senderAddrLen = sizeof(senderAddr);
     ssize_t bytesRead = recvfrom(receiverSocket, buffer, sizeof(buffer) - 1, 0, (struct sockaddr*)&senderAddr, &senderAddrLen);
