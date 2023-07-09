@@ -20,6 +20,6 @@ int Message::getId(){
     return id;
 }
 
-int Message::getType(){
-    return int(type);
+Message::Type Message::getType(){
+    return type;
 }

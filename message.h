@@ -16,5 +16,5 @@ class Message{
         Message(std::string text);
         std::string text();
         int getId();
-        int getType();
+        Type getType();
 };

@@ -6,14 +6,51 @@
 #include "udpSender.h"
 #include "queue.h"
 #include "message.h"
+#include "Spinlock.h"
+
+std::string IP = "127.0.0.1";
+Queue<int> requests;
 
 void controller(UDPReceiver receiver) {
-    Queue<std::string> requests;
+    Spinlock lock;
 
-    std::string msg; 
-    if(receiver.receive(msg)){
-        
+    while(1){
+        std::string msg; 
+        bool isAvailable = 1;
+
+        lock.acquire();
+        if (isAvailable && !requests.isEmpty()){
+            int port = requests.peek();
+            lock.release();
+            UDPSender sender(IP, port);
+            Message grant(Message::Type::GRANT, port);
+            sender.send(grant.text());
+            isAvailable = 0;
+        }
+        lock.release();
+
+        if(receiver.receive(msg)){
+            Message received(msg);
+            int type = received.getType();
+            int id = received.getId();
+
+            if (type == Message::Type::REQUEST){
+                lock.acquire();
+                requests.push(id);
+                lock.release();
+            }
+
+            if (type == Message::Type::REQUEST){
+                lock.acquire();
+                if (id == requests.peek()){
+                    requests.pop();
+                    isAvailable = 1;
+                }
+                lock.release();
+            }
+        }
     }
+    
 }
 
 
