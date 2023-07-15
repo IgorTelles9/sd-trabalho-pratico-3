@@ -19,4 +19,5 @@ class Queue{
         T peek() const; 
         void push(const T& item);
         void pop();
+        std::string getQueue();
 };

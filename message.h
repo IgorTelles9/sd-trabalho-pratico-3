@@ -14,7 +14,7 @@ class Message{
     public:
         Message(Type type, int id);
         Message(std::string text);
-        std::string text();
+        std::string text(const bool& verbose = 0);
         int getId();
         Type getType();
 };

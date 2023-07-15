@@ -67,6 +67,7 @@
         "iomanip": "cpp",
         "unordered_map": "cpp",
         "__split_buffer": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "fstream": "cpp"
     }
 }

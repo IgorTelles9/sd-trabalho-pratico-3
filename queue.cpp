@@ -59,13 +59,28 @@ void Queue<T>::pop()
 
 template <typename T>
 T Queue<T>::peek() const{
-    if (isEmpty())
-    {
-        std::cout << "Queue is empty. Cannot peek." << std::endl;
-        return T();
+    if (isEmpty()){
+        return 0;
     }
-
     return first->data;
 }
 
-// template class Queue<c::string>;
+template <typename T>
+std::string Queue<T>::getQueue() {
+    Node *curr = first; 
+    std::string list = "[";
+    while(1){
+        if (curr == nullptr){
+            break;
+        }
+        list.append(std::to_string(curr->data) + ",");
+        curr = curr->next;
+    }
+    if (list.length() != 1){
+        list.pop_back();
+    }
+    list.append("]");
+    return list;
+}
+
+template class Queue<int>;

@@ -9,9 +9,24 @@ Message::Message(std::string text){
     type = Type(std::stoi(text.substr(6)));
 }
 
-std::string Message::text(){
+std::string Message::text(const bool& verbose){
     std::string identifier = std::to_string(id);
-    std::string req = std::to_string(type);
+    std::string req;
+    if(verbose) {
+        switch (type){
+            case 1: 
+                req = " REQUEST";
+                break;
+            case 2: 
+                req = " GRANT";
+                break;
+            case 3: 
+                req = " RELEASE";
+                break;
+        }
+    } else {
+       req = std::to_string(type); 
+    }
     std::string text = identifier + "|" + req;
     return text;
 }
