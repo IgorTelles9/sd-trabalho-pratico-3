@@ -85,18 +85,18 @@ void* monitor(void* arg){
         if(option == 1){
             lock.acquire();
             int proc = requests.peek();
-            lock.release();
             std::cout << "Identificador/Porta do processo acessando a região crítica: " << proc << ".\n";
+            lock.release();
         }
         else if (option == 2){
             lock.acquire();
             std::string procList = requests.getQueue(); 
-            lock.release();
             std::cout << "Fila de processos para acesso à região crítica: " << procList << ".\n";
+            lock.release();
         }
         else if (option == 3){
             pid_t pid = getpid();
-            kill(pid, SIGKILL);
+            kill(pid, SIGINT);
         }
     }
 

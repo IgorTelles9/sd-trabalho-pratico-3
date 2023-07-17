@@ -2,7 +2,7 @@
 
 # Define the range of integers for the loop
 start=1
-end=4
+end=128
 
 # Loop over the range and run the command
 for ((i=start; i<=end; i++))
