@@ -6,10 +6,10 @@ def validate():
     releases = []
 
     for line in lines:
-        if ("[R] REQUEST" in line):
+        if ("REQUEST" in line):
             requests.append(int(line.split("-")[1]))
             continue
-        if ("[S] GRANT" in line):
+        if ("GRANT" in line):
             if (len(grants) != len(releases)):
                 print(line)
                 print(len(grants))
@@ -17,7 +17,7 @@ def validate():
                 raise Exception("Invalid log file: invalid grants and releases sequence")
             grants.append(int(line.split("-")[1]))
             continue
-        if ("[R] RELEASE" in line):
+        if ("RELEASE" in line):
             if (len(releases) != len(grants) - 1):
                 raise Exception("Invalid log file: invalid grants and releases sequence")
             releases.append(int(line.split("-")[1]))

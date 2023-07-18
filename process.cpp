@@ -36,12 +36,11 @@ int main(int argc, char* argv[]) {
                     resultado << getTime() << " - " << port << std::endl; 
                     resultado.close();
                 }
-
+                sleep(k);
                 Message release(Message::Type::RELEASE, port);
                 sender.send(release.text());
             }
         }
-        sleep(k);
     }
     return 0;
 }
